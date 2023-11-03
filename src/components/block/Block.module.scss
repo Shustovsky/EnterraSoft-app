@@ -1,0 +1,27 @@
+@import 'src/styles/variables';
+
+$block-size: 90px;
+
+.block {
+    width: $block-size;
+    height: $block-size;
+    background: $light-blue;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 50px;
+
+    &Active {
+        animation: bounce 5s infinite;
+    }
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY($block-size);
+    }
+    50% {
+        transform: translateY(-$block-size);
+    }
+}
