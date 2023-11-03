@@ -7,6 +7,9 @@
     border-radius: 100%;
     position: absolute;
     animation: all 2s;
+    &Disabled{
+        display: none;
+    }
 }
 
 @keyframes moveCircle {

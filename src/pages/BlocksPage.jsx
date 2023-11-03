@@ -1,4 +1,4 @@
-import { useEffect, useRef, useState } from 'react';
+import { useCallback, useEffect, useRef, useState } from 'react';
 import { Block } from '../components/block/Block.jsx';
 import { ButtonWithTimer } from '../components/button/ButtonWithTimer.jsx';
 import { Circle } from '../components/Circle/Circle.jsx';
@@ -9,21 +9,33 @@ export const BlocksPage = () => {
   const block2Ref = useRef(null);
   const circleRef = useRef(null);
   const [isStart, setIsStart] = useState(false);
+  const [isDisabled, setIsDisabled] = useState(true);
 
-  const animate = () => {
-    const circleX = circleRef.current.getBoundingClientRect().x;
-    circleRef.current.style.left = circleX + 4 + 'px';
-    if (circleX < block2Ref.current.getBoundingClientRect().x) {
-      requestAnimationFrame(animate);
+  const animate = useCallback(() => {
+    const circleCoordinate = circleRef.current.getBoundingClientRect();
+    const blockCoordinate = block2Ref.current.getBoundingClientRect();
+    circleRef.current.style.left = circleCoordinate.x + 7 + 'px';
+    if (circleCoordinate.y < blockCoordinate.y) {
+      circleRef.current.style.top = circleCoordinate.y + 1 + 'px';
     }
-  };
+    if (circleCoordinate.y > blockCoordinate.y) {
+      circleRef.current.style;
+      circleRef.current.style.top = circleCoordinate.y - 1 + 'px';
+    }
+    if (circleCoordinate.x < blockCoordinate.x) {
+      requestAnimationFrame(animate);
+    } else {
+      setIsStart(false);
+    }
+  }, [circleRef, block2Ref, setIsStart]);
 
   const startCircle = () => {
+    setIsDisabled(false);
     const block1Position = block1Ref.current.getBoundingClientRect();
-    console.log(block1Position);
-    circleRef.current.style.top = block1Position.y;
-    circleRef.current.style.left = block1Position.x;
+    circleRef.current.style.top = block1Position.y + 'px';
+    circleRef.current.style.left = block1Position.x + 'px';
     setIsStart(prevState => !prevState);
+
   };
 
   useEffect(() => {
@@ -40,7 +52,10 @@ export const BlocksPage = () => {
           value={'1'}
           active
         />
-        <Circle ref={circleRef} />
+        <Circle
+          disabled={isDisabled}
+          ref={circleRef}
+        />
         <Block
           ref={block2Ref}
           value={'2'} />
