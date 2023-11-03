@@ -35,7 +35,6 @@ export const BlocksPage = () => {
     circleRef.current.style.top = block1Position.y + 'px';
     circleRef.current.style.left = block1Position.x + 'px';
     setIsStart(prevState => !prevState);
-
   };
 
   useEffect(() => {
