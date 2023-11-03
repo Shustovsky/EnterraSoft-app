@@ -1,24 +1,24 @@
 @import 'src/styles/variables';
 
-.circle{
-    width: 60px;
-    height: 60px;
-    background: $lime;
-    border-radius: 100%;
-    position: absolute;
-    animation: all 2s;
-    &Disabled{
-        display: none;
-    }
+.circle {
+  width: 60px;
+  height: 60px;
+  background: $lime;
+  border-radius: 100%;
+  position: absolute;
+  animation: all 2s;
+  &Disabled {
+    display: none;
+  }
 }
 
 @keyframes moveCircle {
-    0% {
-        left: 0;
-        top: 0;
-    }
-    100% {
-        left: 100px;
-        top: 0;
-    }
+  0% {
+    left: 0;
+    top: 0;
+  }
+  100% {
+    left: 100px;
+    top: 0;
+  }
 }
